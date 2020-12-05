@@ -8,7 +8,5 @@ import { Issue } from 'src/app/core';
 export class IssueCardComponent implements OnInit {
   @Input() issue: Issue;
 
-  ngOnInit() {
-    console.log(this.issue);
-  }
+  ngOnInit() {}
 }
