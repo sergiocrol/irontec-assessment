@@ -1,0 +1,22 @@
+.dark-mode {
+  transition: all .7s ease-in-out;
+  transform: translateY(-50%);
+}
+
+.light-mode {
+  transition: all .7s ease-in-out;
+  transform: translateY(0);
+  img {
+    width: 200%;
+  }
+}
+
+.light {
+  transition: all .7s ease-in-out;
+  fill: #F0EFEF;
+}
+
+.dark {
+  transition: all .7s ease-in-out;
+  fill: #4B4A4A;
+}

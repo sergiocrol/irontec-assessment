@@ -1,0 +1,20 @@
+// Add reusable components such as buttons
+.btn {
+  @apply px-3;
+  @apply py-2;
+  @apply bg-primary;
+  @apply text-white;
+  transition: 200ms;
+}
+
+.btn:hover {
+  @apply bg-primaryHover;
+}
+
+.box {
+  @apply flex;
+  @apply flex-col;
+  @apply items-center;
+  @apply bg-white;
+  @apply dark:bg-darkTertiary
+}

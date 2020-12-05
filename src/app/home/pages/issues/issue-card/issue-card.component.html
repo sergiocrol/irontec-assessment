@@ -1,0 +1,21 @@
+<div class="w-full h-20 flex justify-between mt-2 lg:mt-4 hover:bg-lightPrimary dark:hover:bg-darkSecondary">
+  <div class="flex-1 flex flex-col items-center lg:justify-end">
+    <div 
+    class="rounded-full min-w-10 min-h-10 w-10 h-10 overflow-hidden bg-red-400 lg:mr-6 lg:min-h-15 lg:min-w-15"
+    [style.background-image]="'url(' + issue.user.avatar_url + ')'" [style.background-size]="'100% 100%'"
+    >
+    </div>
+    <div class="text-10 text-greyPrimary dark:text-lightPrimary font-bold overflow-hidden lg:text-xs lg:mr-6"><span class="text-primary font-bold">#</span>{{issue.number}}</div>
+  </div>
+  <div class="flex-3 flex flex-col max-w-60-p justify-between lg:justify-around">
+    <div class="overflow-clip text-xs font-bold lg:text-base lg:mt-2 lg:font-bold text-greyPrimary dark:text-lightPrimary">{{issue.title}}</div>
+    <div class="text-gray-400 mb-6 text-xs lg:text-base lg:mb-0">Created at {{issue.created_at.split('T')[0].split('-').join('/')}} by {{issue.user.login}}</div>
+  </div>
+  <div class="flex flex-1 flex-col items-center lg:justify-start mt-2">
+    <div class="text-10 h-5 p-1 max-w-2 flex items-end text-white rounded-sm lg:ml-6 lg:text-xs" [ngClass]="issue.state === 'open' ? 'bg-secondary' : 'bg-primaryHover'">{{issue.state}}</div>
+    <div class="relative pt-1 flex justify-center lg:ml-6">
+      <img class="max-w-80-p" src="assets/img/comment.svg" alt="comments" />
+      <span class="absolute text-xs text-primary dark:text-lightPrimary font-bold transform translate-y-1/4">{{issue.comments}}</span>
+    </div>
+  </div>
+</div>

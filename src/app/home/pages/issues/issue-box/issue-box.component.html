@@ -1,0 +1,21 @@
+<div class="box shadow-grey-1">
+  <div class="w-full flex border-b-4 border-primary">
+    <input type="text" name="repoUrl" [(ngModel)]="repoUrl" placeholder="owner <space> repo OR repo url" class="flex-1 indent-10 placeholder-gray-400 text-gray-500 outline-none dark:bg-darkSecondary dark:text-gray-300"/>
+    <button [disabled]="(loading$ | async)" class="btn focus:outline-none lg:px-5" (click)="getIssues(repoUrl)" [class.loading]="(loading$ | async)">search</button>
+  </div>
+  <div class="w-full" *ngIf="(issueItems$ | async)">
+    <!-- <ul *ngIf="(issueItems$ | async)">
+      <li *ngFor="let issue of issueItems$ | async">
+        <span>{{ issue.id }}</span>
+      </li>
+    </ul> -->
+    <app-issue-card *ngFor="let issue of issueItems$ | async" [issue]="issue"></app-issue-card>
+    <!-- <app-issue-card></app-issue-card>
+    <app-issue-card></app-issue-card>
+    <app-issue-card></app-issue-card>
+    <app-issue-card></app-issue-card>
+    <app-issue-card></app-issue-card>
+    <app-issue-card></app-issue-card>
+    <app-issue-card></app-issue-card> -->
+  </div>
+</div>
