@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, HostListener } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { StorageService } from 'src/app/core';
  
 @Component({

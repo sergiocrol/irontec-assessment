@@ -1,9 +1,8 @@
-import { LiteralPiece } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
+import { catchError, mergeMap, switchMap } from 'rxjs/operators';
 
 import { GitHubService } from '../../services/github.service';
 import { AppState, Issue } from '../models';

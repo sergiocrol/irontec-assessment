@@ -3,7 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { HeaderComponent, FooterComponent, MoonIconComponent, LogoIconComponent, LogoNameComponent, CardLoadingComponent } from './layout';
+import { 
+  HeaderComponent, 
+  FooterComponent, 
+  MoonIconComponent, 
+  LogoIconComponent, 
+  LogoNameComponent, 
+  CardLoadingComponent 
+} from './layout';
 
  
 @NgModule({
@@ -14,7 +21,14 @@ import { HeaderComponent, FooterComponent, MoonIconComponent, LogoIconComponent,
     HttpClientModule,
     RouterModule
   ],
-  declarations: [ HeaderComponent, FooterComponent, MoonIconComponent, LogoIconComponent, LogoNameComponent, CardLoadingComponent ],
+  declarations: [ 
+    HeaderComponent, 
+    FooterComponent, 
+    MoonIconComponent, 
+    LogoIconComponent, 
+    LogoNameComponent, 
+    CardLoadingComponent 
+  ],
   exports: [
     CommonModule,
     FormsModule,

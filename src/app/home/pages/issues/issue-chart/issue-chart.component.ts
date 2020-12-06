@@ -85,8 +85,6 @@ export class IssueChartComponent implements OnInit, OnChanges {
     });
   }
 
-  // chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {}
-
   changeChartType(): void {
     this.chartType = this.chartType === 'bar' ? 'line' : 'bar';
   }

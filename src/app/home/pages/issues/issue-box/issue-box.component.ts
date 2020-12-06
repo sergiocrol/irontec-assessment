@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
 
 import { AppState } from '../../../../core/store/models/app-state.model';
 import { LoadIssueAction, LoadResetStore } from '../../../../core/store/actions/issue.actions';
