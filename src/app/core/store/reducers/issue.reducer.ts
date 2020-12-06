@@ -5,21 +5,21 @@ export interface IssueState {
   list: Issue[],
   loading: boolean,
   error: Error,
-  pages: number
+  pages: number,
+  callPage: number
 }
 
 const initialState: IssueState = {
   list: [],
   loading: false,
   error: undefined,
-  pages: 0
+  pages: 0,
+  callPage: 1
 }
 
 export function IssueReducer(state: IssueState = initialState, action: IssueAction) {
-  console.log(action.type)
   switch (action.type) {
     case IssueActionTypes.LOAD_ISSUE:
-      console.log('load action')
       return {
         ...state,
         loading: true
@@ -37,11 +37,17 @@ export function IssueReducer(state: IssueState = initialState, action: IssueActi
         loading: false
       }
     case IssueActionTypes.LOAD_PAGES:
-      console.log('load page')
       return {
         ...state,
         pages: action.payload
       }
+    case IssueActionTypes.LOAD_CALL_PAGE:
+      return {
+        ...state,
+        callPage: action.payload
+      }
+    case IssueActionTypes.LOAD_RESET_STORE:
+      return Object.assign({}, initialState);
     default:
       return state;
   }

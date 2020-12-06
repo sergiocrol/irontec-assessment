@@ -3,7 +3,9 @@
     <!-- title -->
     <h1>Home</h1>
     <!-- List -->
-    <app-issue-box></app-issue-box>
+    <app-issue-box [currentPage]="currentPage" (repoUrlEmitter)="repoUrlEmitter($event)"></app-issue-box>
+    <!-- Pagination -->
+    <app-issue-pagination [repoUrl]="repoUrl" (currentPageEmitter)="currentPageEmitter($event)"></app-issue-pagination>
     <!-- Chart -->
   </div>
 </div>

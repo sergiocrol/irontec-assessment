@@ -1,0 +1,42 @@
+<div class="flex justify-center mt-10">
+  <div *ngIf="totalPages.length > 1" class="flex justify-center w-full max-w-lg">
+    <button *ngIf="totalPages.length > 5" 
+      class="flex justify-center items-center w-8 h-8 focus:outline-none font-sans font-bold text-greyPrimary cursor-pointer dark:text-lightPrimary"
+      (click)="selectCurrentPage(currentPage-1)"
+      [disabled]="currentPage <= 1"
+      [class.disabled]="currentPage <= 1"
+    >
+      &#10096;
+    </button>
+    <div 
+      *ngFor="let page of totalPages.slice(currentPage>5 ? currentPage-5 : 0, currentPage>5 ? currentPage : 5)" 
+      class="flex justify-center mx-1 lg:mx-4 items-center w-8 h-8 bg-primary text-white text-base shadow-grey-1 hover:bg-primary cursor-pointer"
+      (click)="selectCurrentPage(page+1)"
+      [class.unSelected]="page+1 !== currentPage">
+      {{page+1}}
+    </div>
+    <div *ngIf="totalPages.length > 5" class="flex">
+      <div 
+        *ngIf="!isFinalPage()"
+        class="flex justify-center items-center w-8 h-8">
+        &#8901;&#8901;&#8901;
+      </div>
+      <!-- <div 
+        *ngIf="totalPages.length !== currentPage"
+        class="flex justify-center items-center w-8 h-8 mx-1 lg:mx-4 bg-primary text-white text-base shadow-grey-1 hover:bg-primary cursor-pointer"
+        (click)="selectCurrentPage(totalPages.length)"
+        [class.unSelected]="totalPages.length !== currentPage"
+      >
+        {{ totalPages.length }}
+      </div> -->
+      <button 
+        class="flex justify-center items-center w-8 h-8 focus:outline-none font-sans cursor-pointer font-bold text-greyPrimary dark:text-lightPrimary"
+        (click)="selectCurrentPage(currentPage+1)"
+        [disabled]="isFinalPage()"
+        [class.disabled]="isFinalPage()"
+      >
+        &#10097;
+      </button>
+    </div>
+  </div>
+</div>

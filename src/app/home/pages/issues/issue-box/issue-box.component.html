@@ -4,18 +4,9 @@
     <button [disabled]="(loading$ | async)" class="btn focus:outline-none lg:px-5" (click)="getIssues(repoUrl)" [class.loading]="(loading$ | async)">search</button>
   </div>
   <div class="w-full" *ngIf="(issueItems$ | async)">
-    <!-- <ul *ngIf="(issueItems$ | async)">
-      <li *ngFor="let issue of issueItems$ | async">
-        <span>{{ issue.id }}</span>
-      </li>
-    </ul> -->
-    <app-issue-card *ngFor="let issue of issueItems$ | async" [issue]="issue"></app-issue-card>
-    <!-- <app-issue-card></app-issue-card>
-    <app-issue-card></app-issue-card>
-    <app-issue-card></app-issue-card>
-    <app-issue-card></app-issue-card>
-    <app-issue-card></app-issue-card>
-    <app-issue-card></app-issue-card>
-    <app-issue-card></app-issue-card> -->
+    <app-issue-card *ngFor="let issue of getCurrentPage()" [issue]="issue"></app-issue-card>
+  </div>
+  <div>
+    {{currentPage}}
   </div>
 </div>
