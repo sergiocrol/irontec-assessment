@@ -19,14 +19,38 @@ export class IssueBoxComponent implements OnInit {
   loading$: Observable<Boolean>;
   error$: Observable<Error>
 
-  repoUrl:string;
+  repoUrl:string = '';
+  repoTitle:string = '';
   issues:Issue[];
   pageLimit = 8;
+  firstVisit:boolean;
 
   constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
     this.currentPage = 1;
+    this.firstVisit = true;
+  }
+
+  checkInput():boolean {
+    const validUrl = this.repoUrl.trim().length > 0 
+    && this.repoUrl.match(/\//g)?.length >= 2 
+    && this.repoUrl.match(/\//g)?.length <= 5 
+    && this.repoUrl.charAt(this.repoUrl.length-1) !== '/';
+
+    return validUrl;
+  }
+
+  isEmpty() {
+    let isEmpty;
+    this.store.select(store => store.issues.list).subscribe(res => {
+      this.store.select(store => store.issues.error).subscribe(err => {
+        this.store.select(store => store.issues.loading).subscribe(load => {
+          isEmpty = !res.length && !this.firstVisit && !err && !load
+        })
+      })
+    })
+    return isEmpty;
   }
 
   getPageIssues() {
@@ -41,6 +65,7 @@ export class IssueBoxComponent implements OnInit {
   }
 
   getIssues(repo) {
+    this.repoTitle = '';
     this.store.dispatch(new LoadResetStore());
     this.repoUrlEmitter.emit(repo);
     this.store.dispatch(new LoadIssueAction(repo));
@@ -53,6 +78,11 @@ export class IssueBoxComponent implements OnInit {
       this.issues = res;
     });
 
+    // Assign title
+    this.repoTitle = repo.split('/')[repo.split('/').length-1] || 'repository name';
+    this.firstVisit = false;
+
+    // reset repo input and current page
     this.repoUrl = '';
     this.currentPage = 1;
   }

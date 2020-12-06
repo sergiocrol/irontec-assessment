@@ -19,8 +19,11 @@ module.exports = {
       },
       fontSize: {
         10: "0.625rem",
+        1.2: "1.2rem",
       },
       maxWidth: {
+        "40-p": "40%",
+        "50-p": "50%",
         "60-p": "60%",
         "80-p": "80%",
         "90-p": "90%",
@@ -29,10 +32,15 @@ module.exports = {
       minWidth: {
         10: "2.5rem",
         15: "3.5rem",
+        "50-p": "50%",
       },
       minHeight: {
         10: "2.5rem",
         15: "3.5rem",
+        47: "47rem",
+      },
+      height: {
+        1.5: "1.5rem",
       },
       flex: {
         2: "2 2 0%",

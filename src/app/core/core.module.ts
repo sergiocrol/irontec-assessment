@@ -4,6 +4,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 
 import { GitHubService } from './services/github.service';
+import { StorageService } from './services/storage.service';
 import { IssueReducer } from './store/reducers/issue.reducer';
 import { IssueEffects } from './store/effects/issue.effects';
  
@@ -14,7 +15,8 @@ import { IssueEffects } from './store/effects/issue.effects';
     HttpClientModule
   ],
   providers: [
-    GitHubService
+    GitHubService,
+    StorageService
   ],
   declarations: []
 })

@@ -9,7 +9,7 @@ import { AppState, Issue, LoadCallPage, LoadIssueAction } from '../../../../core
   templateUrl: './issue-pagination.component.html',
   styleUrls: ['./issue-pagination.component.scss']
 })
-export class IssuePaginationComponent implements OnInit {
+export class IssuePaginationComponent implements OnInit, OnChanges {
   @Input() repoUrl: string;
   @Output() currentPageEmitter:EventEmitter<number> = new EventEmitter<number>();
 
@@ -22,6 +22,26 @@ export class IssuePaginationComponent implements OnInit {
   pagesLimit = 8;
 
   constructor(private store: Store<AppState>) {};
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes.repoUrl) {
+      this.currentPage = 1;
+    }
+  }
+
+
+  ngOnInit() {
+    console.log(this.currentPage, this.currentRequest, this.pages, this.totalPages)
+    this.currentPage = 1;
+    this.store.select(store => store.issues.list).subscribe(res => {
+      this.issues = res.length; 
+      this.store.select(store => store.issues.pages).subscribe(res => {
+        this.pages = res;
+        this.pagesPerIteration = Math.ceil(this.issues / 8);
+        this.totalPages = this.toArray(this.pagesPerIteration);
+      });
+    });
+  }
 
   selectCurrentPage(num: number) {
     this.currentPage = num;
@@ -46,17 +66,6 @@ export class IssuePaginationComponent implements OnInit {
 
   isFinalPage():boolean {
     return this.currentRequest === this.pages && Math.ceil(this.issues/this.pagesLimit) === this.currentPage;
-  }
-
-  ngOnInit() {
-    this.store.select(store => store.issues.list).subscribe(res => {
-      this.issues = res.length; 
-      this.store.select(store => store.issues.pages).subscribe(res => {
-        this.pages = res;
-        this.pagesPerIteration = Math.ceil(this.issues / 8);
-        this.totalPages = this.toArray(this.pagesPerIteration);
-      });
-    });
   }
 
 };

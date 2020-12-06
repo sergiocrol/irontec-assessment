@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, HostListener } from '@angular/core';
+import { StorageService } from 'src/app/core';
  
 @Component({
   selector: 'app-header',
@@ -7,6 +8,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   @Output() darkMode:EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  constructor(private storageService: StorageService  ){}
 
   toggled: boolean = false;
 
@@ -19,7 +22,7 @@ export class HeaderComponent implements OnInit {
   toggle() {
     this.toggled = !this.toggled;
 
-    localStorage.setItem('dark', this.toggled.toString());
+    this.storageService.setItem('dark', this.toggled.toString());
     this.darkMode.emit(this.toggled);
   }
 }

@@ -1,12 +1,38 @@
 <div class="box shadow-grey-1">
   <div class="w-full flex border-b-4 border-primary">
-    <input type="text" name="repoUrl" [(ngModel)]="repoUrl" placeholder="owner <space> repo OR repo url" class="flex-1 indent-10 placeholder-gray-400 text-gray-500 outline-none dark:bg-darkSecondary dark:text-gray-300"/>
-    <button [disabled]="(loading$ | async)" class="btn focus:outline-none lg:px-5" (click)="getIssues(repoUrl)" [class.loading]="(loading$ | async)">search</button>
+    <input type="text" name="repoUrl" [(ngModel)]="repoUrl" placeholder="repository's url" class="flex-1 indent-10 placeholder-gray-400 text-gray-500 outline-none dark:bg-darkSecondary dark:text-gray-300"/>
+    <button [disabled]="!checkInput() || (loading$ | async)" class="btn focus:outline-none lg:px-5" (click)="getIssues(repoUrl)" [class.loading]="!checkInput() || (loading$ | async)">search</button>
   </div>
-  <div class="w-full" *ngIf="(issueItems$ | async)">
-    <app-issue-card *ngFor="let issue of getCurrentPage()" [issue]="issue"></app-issue-card>
-  </div>
-  <div>
-    {{currentPage}}
+  <div *ngIf="repoTitle" class="h-1.5 bg-primary w-full text-center text-white font-montserrat font-bold">{{ repoTitle }}</div>
+  <div class="w-full min-h-47 py-3">
+    <!-- Loading template -->
+    <div *ngIf="(loading$ | async)">
+      <app-card-loading *ngFor="let card of [0,1,2,3,4,5,6,7]"></app-card-loading>
+    </div>
+    <!-- First visit -->
+    <div *ngIf="firstVisit" class="w-full h-full flex flex-col justify-center items-center mt-8">
+      <img src="assets/img/octocat-ini.png" alt="ini" class="max-w-60-p lg:max-w-40-p"/>
+      <div class="text-1.2 max-w-80-p font-montserrat font-bold text-gray-500 dark:text-gray-400 w-full text-center mt-5 lg:text-3xl">Write a valid repository url to start</div>
+      <div class="border-gray-300 border-2 border-dashed px-4 py-4 mt-14 rounded-md max-w-90-p relative">
+        <span class="absolute -top-7 left-0 font-bold text-gray-400">Examples</span>
+        <div class="my-2 text-gray-400 text-sm lg:text-base">https://github.com/valor-software/ng2-charts</div>
+        <div class="my-2 text-gray-400 text-sm lg:text-base">github.com/valor-software/ng2-charts</div>
+      </div>
+    </div>
+    <!-- Successful Request -->
+    <div *ngIf="(issueItems$ | async)" class="w-full">
+      <app-issue-card *ngFor="let issue of getCurrentPage()" [issue]="issue"></app-issue-card>
+    </div>
+    <!-- Repository with no issues -->
+    <div *ngIf="isEmpty()" class="w-full h-full flex flex-col justify-center items-center mt-8">
+      <img src="assets/img/octocat-empty.png" alt="empty" class="max-w-60-p lg:max-w-50-p"/>
+      <div class="text-1.2 max-w-80-p font-montserrat font-bold text-gray-500 dark:text-gray-400 w-full text-center mt-5 lg:text-3xl">Ops! No issues for this repository</div>
+    </div>
+    <!-- Error status -->
+    <div *ngIf="(error$ | async)" class="w-full h-full flex flex-col justify-center items-center mt-8">
+      <img src="assets/img/octocat-not-found.png" alt="not found" class="max-w-60-p lg:max-w-50-p"/>
+      <div class="text-1.2 max-w-80-p font-montserrat font-bold text-gray-500 dark:text-gray-400 w-full text-center mt-5 lg:text-3xl">This is the only thing we've found</div>
+      <div class="text-base text-gray-400 dark:text-gray-300 w-full text-center mt-3 lg:text-xl">Please, check that the url is correct</div>
+    </div>
   </div>
 </div>
