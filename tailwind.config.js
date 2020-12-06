@@ -1,5 +1,10 @@
+require("dotenv").config();
+const enablePurge = process.env.ENABLE_PURGE || false;
 module.exports = {
-  purge: ["./src/**/*.html", "./src/**/*.ts"],
+  purge: {
+    enabled: enablePurge,
+    content: ["./src/**/*.html", "./src/**/*.ts", "./src/**/*.scss"],
+  },
   darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {
