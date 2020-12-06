@@ -1,0 +1,6 @@
+<div *ngIf="issues.length" class="mt-20">
+  <h1 class="my-4 text-xl lg:text-3xl font-montserrat font-bold text-gray-400">Number of issues in the last months</h1>
+  <canvas baseChart [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions"
+  [legend]="chartLegend" [chartType]="chartType"></canvas>
+  <button class="btn focus:outline-none mt-4 w-36" (click)="changeChartType()">change to {{chartType === 'bar' ? 'linear' : 'bar'}}</button>
+</div>

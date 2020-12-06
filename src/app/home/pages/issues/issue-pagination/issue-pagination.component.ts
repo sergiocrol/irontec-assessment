@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
 import { AppState, Issue, LoadCallPage, LoadIssueAction } from '../../../../core';
 
 @Component({
@@ -31,7 +29,6 @@ export class IssuePaginationComponent implements OnInit, OnChanges {
 
 
   ngOnInit() {
-    console.log(this.currentPage, this.currentRequest, this.pages, this.totalPages)
     this.currentPage = 1;
     this.store.select(store => store.issues.list).subscribe(res => {
       this.issues = res.length; 
